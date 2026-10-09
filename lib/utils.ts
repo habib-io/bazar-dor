@@ -34,6 +34,7 @@ export function changeBadge(change: { dir: string; pct: number }) {
 
 export function banglaDate(): string {
   return new Date().toLocaleDateString("bn-BD", {
+    timeZone: "Asia/Dhaka",
     weekday: "long",
     day: "numeric",
     month: "long",
