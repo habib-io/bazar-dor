@@ -1,6 +1,6 @@
 const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
 
-// 1850 
+// 1850 -> ১,৮৫০
 export function toBn(value: number | string): string {
   return String(value).replace(/\d/g, (d) => BN_DIGITS[Number(d)]);
 }
@@ -22,7 +22,6 @@ export function unitLabel(unit: string): string {
   return UNITS[unit.toLowerCase()] ?? `প্রতি ${unit}`;
 }
 
-// badge
 export function changeBadge(change: { dir: string; pct: number }) {
   const pct = toBn(change.pct.toFixed(1));
   if (change.dir === "up")
