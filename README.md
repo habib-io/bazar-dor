@@ -2,7 +2,7 @@
 
 বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনিক দাম ট্র্যাক করার ওয়েবসাইট।
 
-🔗 Live: <vercel-link>
+🔗 Live: (https://bazar-dor-kohl-nine.vercel.app)
 
 ## Technologies
 Next.js (App Router), TypeScript, Tailwind CSS, DaisyUI, BetterAuth, MongoDB, react-hot-toast
