@@ -1,12 +1,27 @@
 import { Category, Product } from "./types";
 
-const BASE = "https://api.api-store.workers.dev/api/bazardor";
+const BASES = [
+  "https://openapi.programming-hero.com/api/bazardor",
+  "https://api.api-store.workers.dev/api/bazardor",
+  "https://api.abcz.workers.dev/api/bazardor",
+];
+
+async function fetchJson<T>(path: string): Promise<T | null> {
+  for (const base of BASES) {
+    try {
+      const res = await fetch(`${base}${path}`, { cache: "no-store" });
+      if (res.ok) return (await res.json()) as T;
+    } catch {
+      // এই API কাজ না করলে পরেরটা চেষ্টা করবে
+    }
+  }
+  return null;
+}
 
 export async function getProducts(category?: string): Promise<Product[]> {
-  const url = category ? `${BASE}/products?category=${category}` : `${BASE}/products`;
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json();
+  const path = category ? `/products?category=${category}` : "/products";
+  const data = await fetchJson<Product[]>(path);
+  return data ?? [];
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
@@ -15,7 +30,6 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${BASE}/categories`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch categories");
-  return res.json();
+  const data = await fetchJson<Category[]>("/categories");
+  return data ?? [];
 }
