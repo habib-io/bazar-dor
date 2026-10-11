@@ -24,6 +24,12 @@ export const auth = betterAuth({
   database: mongodbAdapter(db),
   emailAndPassword: { enabled: true, autoSignIn: false },
   socialProviders,
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["github", "google"],
+    },
+  },
   trustedOrigins: ["https://*.vercel.app", "http://localhost:3000"],
   plugins: [nextCookies()],
 });
